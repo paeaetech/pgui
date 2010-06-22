@@ -1,0 +1,36 @@
+
+
+PGUI - IMGUI Python library
+===========================
+
+PGUI is a project I originally wrote during christmas 2009 when visiting my parents and forgot until I found it again a while ago.
+It still has a lot of improvements but currently it has a theme support and most of the common widgets work.
+
+Current widget list:  
+ * Button
+ * CheckedButton
+ * ScrollBar
+ * TextBox
+ * Text
+ * CheckBox
+ * EditText
+ 
+PGUI also has support for automatic layouts:  
+ * HorizontalLayout
+ * VerticalLayout
+ * GridLayout
+ * AlignLeft
+
+Layouts work by using Python _with_ statement:
+
+	with VerticalLayout((300,10),(300,300)):
+		Button('1')
+		Button('2')
+	
+		with HorizontalLayout():
+			Button('3')
+			Button('4')
+		
+
+Check out the test.py for example of how to use the library.
+
