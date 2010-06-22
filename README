@@ -5,6 +5,8 @@ PGUI - IMGUI Python library
 
 PGUI is a project I originally wrote during christmas 2009 when visiting my parents and forgot until I found it again a while ago.
 It still has a lot of improvements but currently it has a theme support and most of the common widgets work.
+PGUI requires pygame library.
+
 
 Current widget list:  
  * Button
