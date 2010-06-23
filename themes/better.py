@@ -125,7 +125,7 @@ class BetterTheme(Theme):
 
 
 	def _drawRoundedButton(self,pos,size,color,borderColor,width,textColor,font,text=None,**kwargs):
-		simulate = "simulate" in kwargs
+		simulate = "simulate" in kwargs and kwargs['simulate']
 
 		if text:
 			tw,th = font.size(text)
@@ -161,7 +161,7 @@ class BetterTheme(Theme):
 
 		
 	def _drawButton(self,pos,size,color,borderColor,width,textColor,font,text=None,**kwargs):
-		simulate = "simulate" in kwargs
+		simulate = "simulate" in kwargs and kwargs['simulate']
 		
 		if text:
 			tw,th = font.size(text)
@@ -179,11 +179,11 @@ class BetterTheme(Theme):
 		draw.drawRect(pos,size,borderColor,width)
 
 		if text:
-			if "upper" in kwargs:
+			if "upper" in kwargs and kwargs['upper']:
 				text = text.upper()
-			elif "lower" in kwargs:
+			elif "lower" in kwargs and kwargs['lower']:
 				text = text.lower()
-			elif "capitalize" in kwargs:
+			elif "capitalize" in kwargs and kwargs['capitalize']:
 				text = text.capitalize()
 				
 			fx = size[0]/2-tw/2
@@ -236,7 +236,7 @@ class BetterTheme(Theme):
 			fw,fh = pgui.textUtils.getTextExtents(lines,font)
 			size = (fw+pad*2,fh+pad*2)
 
-		if "simulate" in kwargs:
+		if "simulate" in kwargs and kwargs["simulate"]:
 			return (pos,size)
 
 		x,y = pos
@@ -246,8 +246,8 @@ class BetterTheme(Theme):
 		tx = x+pad
 		ty = y+pad
 		
-		doCenter = "center" in kwargs
-		doRight = "right" in kwargs and not doCenter
+		doCenter = "center" in kwargs and kwargs["center"]
+		doRight = "right" in kwargs and kwargs["right"] and not doCenter
 		draw = UIState.getDraw()
 		
 		for line in lines:

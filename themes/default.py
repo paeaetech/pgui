@@ -126,7 +126,7 @@ class DefaultTheme(Theme):
 
 
 	def _drawRoundedButton(self,pos,size,color,borderColor,width,textColor,font,text=None,**kwargs):
-		simulate = "simulate" in kwargs
+		simulate = "simulate" in kwargs and kwargs['simulate']
 
 		if text:
 			tw,th = font.size(text)
@@ -180,7 +180,7 @@ class DefaultTheme(Theme):
 
 		
 	def _drawButton(self,pos,size,color,borderColor,width,textColor,font,text=None,**kwargs):
-		simulate = "simulate" in kwargs
+		simulate = "simulate" in kwargs and kwargs['simulate']
 		
 		if text:
 			tw,th = font.size(text)
@@ -198,11 +198,11 @@ class DefaultTheme(Theme):
 		draw.drawLines([pos,(x+w-width,y),(x+w-width,y+h-width),(x,y+h-width)],borderColor,True,width)
 
 		if text:
-			if "upper" in kwargs:
+			if kwargs.pop("upper",False):
 				text = text.upper()
-			elif "lower" in kwargs:
+			elif kwargs.pop("lower",False):
 				text = text.lower()
-			elif "capitalize" in kwargs:
+			elif kwargs.pop("capitalize",False):
 				text = text.capitalize()
 				
 			fx = size[0]/2-tw/2
@@ -214,27 +214,27 @@ class DefaultTheme(Theme):
 			
 	def drawButton(self,pos,size=None,text=None,**kwargs):
 		pos,size = super(DefaultTheme,self).drawButton(pos,size,text,**kwargs)
-		if "straight" in kwargs:
+		if "straight" in kwargs and kwargs['straight']:
 			return self._drawButton(pos,size,self._get("buttonColor"),self._get("buttonEdgeColor"),self._get("buttonEdgeWidth"),self._get("buttonTextColor"),self._getFont("buttonFont"),text,**kwargs)
 		return self._drawRoundedButton(pos,size,self._get("buttonColor"),self._get("buttonEdgeColor"),self._get("buttonEdgeWidth"),self._get("buttonTextColor"),self._getFont("buttonFont"),text,**kwargs)
 		
 	def drawActiveButton(self,pos,size=None,text=None,**kwargs):
 		pos,size = super(DefaultTheme,self).drawActiveButton(pos,size,text,**kwargs)
-		if "straight" in kwargs:
+		if "straight" in kwargs and kwargs['straight']:
 			return self._drawButton(pos,size,self._get("buttonActiveColor"),self._get("buttonActiveEdgeColor"),self._get("buttonEdgeWidth"),self._get("buttonActiveTextColor"),self._getFont("buttonFont"),text,**kwargs)
 
 		return self._drawRoundedButton(pos,size,self._get("buttonActiveColor"),self._get("buttonActiveEdgeColor"),self._get("buttonEdgeWidth"),self._get("buttonActiveTextColor"),self._getFont("buttonFont"),text,**kwargs)
 		
 	def drawClickedButton(self,pos,size=None,text=None,**kwargs):
 		pos,size = super(DefaultTheme,self).drawClickedButton(pos,size,text,**kwargs)
-		if "straight" in kwargs:
+		if "straight" in kwargs and kwargs['straight']:
 			return self._drawButton(pos,size,self._get("buttonClickedColor"),self._get("buttonClickedEdgeColor"),self._get("buttonEdgeWidth"),self._get("buttonClickedTextColor"),self._getFont("buttonFont"),text,**kwargs)
 
 		return self._drawRoundedButton(pos,size,self._get("buttonClickedColor"),self._get("buttonClickedEdgeColor"),self._get("buttonEdgeWidth"),self._get("buttonClickedTextColor"),self._getFont("buttonFont"),text,**kwargs)
 		
 	def drawDisabledButton(self,pos,size=None,text=None,**kwargs):
 		pos,size = super(DefaultTheme,self).drawDisabledButton(pos,size,text,**kwargs)
-		if "straight" in kwargs:
+		if "straight" in kwargs and kwargs['straight']:
 			return self._drawButton(pos,size,self._get("buttonDisabledColor"),self._get("buttonDisabledEdgeColor"),self._get("buttonEdgeWidth"),self._get("buttonDisabledTextColor"),self._getFont("buttonFont"),text,**kwargs)
 
 		return self._drawRoundedButton(pos,size,self._get("buttonDisabledColor"),self._get("buttonDisabledEdgeColor"),self._get("buttonEdgeWidth"),self._get("buttonDisabledTextColor"),self._getFont("buttonFont"),text,**kwargs)
@@ -256,7 +256,7 @@ class DefaultTheme(Theme):
 			fw,fh = pgui.textUtils.getTextExtents(lines,font)
 			size = (fw+pad*2,fh+pad*2)
 
-		if "simulate" in kwargs:
+		if "simulate" in kwargs and kwargs['simulate']:
 			return (pos,size)
 
 		x,y = pos
@@ -266,8 +266,8 @@ class DefaultTheme(Theme):
 		tx = x+pad
 		ty = y+pad
 		
-		doCenter = "center" in kwargs
-		doRight = "right" in kwargs and not doCenter
+		doCenter = "center" in kwargs and kwargs['center']
+		doRight = "right" in kwargs and kwargs['right'] and not doCenter
 		
 		for line in lines:
 			_w,_h = font.size(line)
