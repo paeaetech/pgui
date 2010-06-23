@@ -17,7 +17,7 @@ def Button(text=None,pos=None,size=None,**kwargs):
 	pos,size = theme.drawButton(pos,size,text,simulate=True,**kwargs)
 	pos,size = UIState.doLayout(pos,size,**kwargs)
 	
-	disabled = "disabled" in kwargs
+	disabled = "disabled" in kwargs and kwargs['disabled']
 	disabledFunc = None
 	if disabled:
 		disabledFunc = theme.drawDisabledButton
@@ -59,7 +59,7 @@ def CheckedButton(value,text=None,pos=None,size=None,**kwargs):
 	pos,size = theme.drawButton(pos,size,text,simulate=True,**kwargs)
 	pos,size = UIState.doLayout(pos,size,**kwargs)
 
-	disabled = "disabled" in kwargs
+	disabled = "disabled" in kwargs and kwargs['disabled']
 	disabledFunc = None
 	if disabled:
 		disabledFunc = theme.drawDisabledButton
@@ -104,7 +104,7 @@ def ScrollBar(value,minvalue=0,maxvalue=255,pos=None,size=None,**kwargs):
 	# 	raise ParameterError("value needs to be list")
 	
 	theme = UIState.getTheme()
-	disabled = "disabled" in kwargs
+	disabled = "disabled" in kwargs and kwargs['disabled']
 
 	pos,size = theme.drawBox(pos,size,simulate=True,**kwargs)
 	pos,size = UIState.doLayout(pos,size,**kwargs)
@@ -195,7 +195,7 @@ def CheckBox(value,text,pos=None,size=None,**kwargs):
 		size = boxsize
 		
 	pos,size = UIState.doLayout(pos,size,**kwargs)
-	disabled = "disabled" in kwargs
+	disabled = "disabled" in kwargs and kwargs['disabled']
 	
 	if mouseIsInside(pos,boxsize):
 		if not disabled:
@@ -227,7 +227,7 @@ def EditText(text,pos=None,size=None,**kwargs):
 	theme = UIState.getTheme()
 	
 	ret = False
-	disabled = "disabled" in kwargs
+	disabled = "disabled" in kwargs and kwargs['disabled']
 	maxlength = kwargs.pop("max_length",255)
 	font = theme.getFont("textFont")
 	if not size:
