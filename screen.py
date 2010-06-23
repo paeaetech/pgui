@@ -33,7 +33,9 @@ class Screen(object):
 			self.initGL(*self.size)
 			UIState.setFlag("opengl",True)
 			
-			
+	def getSize(self):
+		return self.size
+		
 	def getScreen(self):
 		return self.screen
 		
