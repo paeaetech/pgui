@@ -243,6 +243,7 @@ class DefaultTheme(Theme):
 		pos,size = super(DefaultTheme,self).drawText(text,pos,size,**kwargs)
 		draw = UIState.getDraw()
 		
+		text = unicode(text)
 		font = self._getFont("textFont")
 		pad = self._get("textBoxPadding")
 

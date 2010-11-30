@@ -14,7 +14,7 @@ import pygame
 from pygame.locals import *
 
 def main():
-	screen = Screen((1024,720),title="pgui")
+	screen = Screen((1024,720),title="pgui",opengl=True)
 
 	themes = [] # load_theme("default")]
 	for theme in list_themes():

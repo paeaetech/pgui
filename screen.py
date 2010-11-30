@@ -1,6 +1,9 @@
 
 import pygame
 from pygame.locals import *
+from OpenGL.GL import *
+from OpenGL.GLU import *
+from OpenGL.GLUT import *
 
 from state import UIState
 
@@ -21,10 +24,6 @@ class Screen(object):
 		self.opengl =  "opengl" in kwargs
 		
 		if self.opengl:
-			from OpenGL.GL import *
-			from OpenGL.GLU import *
-			from OpenGL.GLUT import *
-			
 			flags |= OPENGL
 			
 		self.screen = pygame.display.set_mode(size, flags,32)
@@ -40,6 +39,7 @@ class Screen(object):
 		return self.screen
 		
 	def initGL(self,w,h):
+
 		self.resize(w,h)
 		glClearColor(0,0,0,0)
 		glShadeModel(GL_FLAT)

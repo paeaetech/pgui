@@ -223,6 +223,7 @@ class BetterTheme(Theme):
 	def drawText(self,text,pos,size=None,**kwargs):
 		pos,size = super(BetterTheme,self).drawText(text,pos,size,**kwargs)
 		
+		text = unicode(text)
 		font = self._getFont("textFont")
 		pad = self._get("textBoxPadding")
 
